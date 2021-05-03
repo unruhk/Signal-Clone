@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar'
 import React, { useLayoutEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Button, Input } from 'react-native-elements'
@@ -16,20 +17,21 @@ const AddChatScreen = ({ navigation }) => {
 
     const createChat = async () => {
         await db
-        .collection('chats')
-        .add({
-            chatName: input,
-        })
-        .then(() => {
-            navigation.goBack()
-        })
-        .catch((error) => alert(error))
+            .collection('chats')
+            .add({
+                chatName: input,
+            })
+            .then(() => {
+                navigation.goBack()
+            })
+            .catch((error) => alert(error))
     }
-    
+
     return (
         <View style={styles.container}>
+            <StatusBar style='light' />
             <Input
-                placeholder='Enter a chat name' 
+                placeholder='Enter a chat name'
                 value={input}
                 onChangeText={(text) => setInput(text)}
                 onSubmitEditing={createChat}
